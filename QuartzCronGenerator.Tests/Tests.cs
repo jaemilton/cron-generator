@@ -6,6 +6,18 @@ namespace QuartzCronGenerator.Tests
     public class Tests
     {
         [Fact]
+        public void TestEveryNSeconds()
+        {
+            var ce1 = CronExpression.EveryNSeconds(1);
+            var ce2 = CronExpression.EveryNSeconds(59);
+            var ce3 = CronExpression.EveryNSeconds(3600);
+
+            Assert.Equal("0/1 * * 1/1 * ? *", ce1);
+            Assert.Equal("0/59 * * 1/1 * ? *", ce2);
+            Assert.Equal("0/3600 * * 1/1 * ? *", ce3);
+        }
+
+        [Fact]
         public void TestEveryNMinutes()
         {
             var ce1 = CronExpression.EveryNMinutes(1);

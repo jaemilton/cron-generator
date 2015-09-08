@@ -23,6 +23,9 @@ namespace QuartzCronGenerator
         {
             switch (ExpressionType)
             {
+                case CronExpressionType.EveryNSeconds:
+                    _cronString = string.Format("0/{0} * * 1/1 * ? *", _interval);
+                    break;
                 case CronExpressionType.EveryNMinutes:
                     _cronString = string.Format("0 0/{0} * 1/1 * ? *", _interval);
                     break;
@@ -138,6 +141,18 @@ namespace QuartzCronGenerator
 
             BuildCronExpression();
         }
+
+        /// <summary>
+        /// Create new CronExpression instance, which occurs every *secondsInteval* seconds
+        /// </summary>
+        /// <param name="secondsInteval">Interval in seconds</param>
+        /// <returns>New CronExpression instance</returns>
+        public static CronExpression EveryNSeconds(int secondsInteval)
+        {
+            var ce = new CronExpression(secondsInteval, CronExpressionType.EveryNSeconds);
+            return ce;
+        }
+
 
         /// <summary>
         /// Create new CronExpression instance, which occurs every *minutesInteval* minutes

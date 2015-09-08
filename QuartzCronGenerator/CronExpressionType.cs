@@ -2,6 +2,7 @@
 {
     public enum CronExpressionType
     {
+        EveryNSeconds,
         EveryNMinutes,
         EveryNHours,
         EveryDayAt,

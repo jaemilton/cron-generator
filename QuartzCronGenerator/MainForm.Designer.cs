@@ -32,6 +32,10 @@
             this.MainPanel = new System.Windows.Forms.Panel();
             this.InputPanel = new System.Windows.Forms.Panel();
             this.InputTabControl = new System.Windows.Forms.TabControl();
+            this.SecondsPage = new System.Windows.Forms.TabPage();
+            this.SecondsLabel = new System.Windows.Forms.Label();
+            this.SecondsUpDown = new System.Windows.Forms.NumericUpDown();
+            this.EveryLabel0 = new System.Windows.Forms.Label();
             this.MinutesPage = new System.Windows.Forms.TabPage();
             this.MinutesLabel = new System.Windows.Forms.Label();
             this.MinutesUpDown = new System.Windows.Forms.NumericUpDown();
@@ -96,6 +100,8 @@
             this.MainPanel.SuspendLayout();
             this.InputPanel.SuspendLayout();
             this.InputTabControl.SuspendLayout();
+            this.SecondsPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SecondsUpDown)).BeginInit();
             this.MinutesPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MinutesUpDown)).BeginInit();
             this.HoursPage.SuspendLayout();
@@ -133,6 +139,7 @@
             // 
             // InputTabControl
             // 
+            this.InputTabControl.Controls.Add(this.SecondsPage);
             this.InputTabControl.Controls.Add(this.MinutesPage);
             this.InputTabControl.Controls.Add(this.HoursPage);
             this.InputTabControl.Controls.Add(this.DaysPage);
@@ -145,6 +152,59 @@
             this.InputTabControl.SelectedIndex = 0;
             this.InputTabControl.Size = new System.Drawing.Size(408, 211);
             this.InputTabControl.TabIndex = 6;
+            // 
+            // SecondsPage
+            // 
+            this.SecondsPage.Controls.Add(this.SecondsLabel);
+            this.SecondsPage.Controls.Add(this.SecondsUpDown);
+            this.SecondsPage.Controls.Add(this.EveryLabel0);
+            this.SecondsPage.Location = new System.Drawing.Point(4, 22);
+            this.SecondsPage.Name = "SecondsPage";
+            this.SecondsPage.Padding = new System.Windows.Forms.Padding(3);
+            this.SecondsPage.Size = new System.Drawing.Size(400, 185);
+            this.SecondsPage.TabIndex = 6;
+            this.SecondsPage.Text = "SecondsPage";
+            this.SecondsPage.UseVisualStyleBackColor = true;
+            // 
+            // SecondsLabel
+            // 
+            this.SecondsLabel.AutoSize = true;
+            this.SecondsLabel.Location = new System.Drawing.Point(110, 23);
+            this.SecondsLabel.Name = "SecondsLabel";
+            this.SecondsLabel.Size = new System.Drawing.Size(47, 13);
+            this.SecondsLabel.TabIndex = 5;
+            this.SecondsLabel.Text = "seconds";
+            // 
+            // SecondsUpDown
+            // 
+            this.SecondsUpDown.Location = new System.Drawing.Point(57, 21);
+            this.SecondsUpDown.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.SecondsUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.SecondsUpDown.Name = "SecondsUpDown";
+            this.SecondsUpDown.Size = new System.Drawing.Size(47, 20);
+            this.SecondsUpDown.TabIndex = 4;
+            this.SecondsUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // EveryLabel0
+            // 
+            this.EveryLabel0.AutoSize = true;
+            this.EveryLabel0.Location = new System.Drawing.Point(17, 23);
+            this.EveryLabel0.Name = "EveryLabel0";
+            this.EveryLabel0.Size = new System.Drawing.Size(34, 13);
+            this.EveryLabel0.TabIndex = 3;
+            this.EveryLabel0.Text = "Every";
             // 
             // MinutesPage
             // 
@@ -1371,6 +1431,9 @@
             this.MainPanel.ResumeLayout(false);
             this.InputPanel.ResumeLayout(false);
             this.InputTabControl.ResumeLayout(false);
+            this.SecondsPage.ResumeLayout(false);
+            this.SecondsPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SecondsUpDown)).EndInit();
             this.MinutesPage.ResumeLayout(false);
             this.MinutesPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MinutesUpDown)).EndInit();
@@ -1462,6 +1525,10 @@
         private System.Windows.Forms.ComboBox MinutesComboBox5;
         private System.Windows.Forms.ComboBox HoursComboBox5;
         private System.Windows.Forms.Label StartTimeLabel4;
+        private System.Windows.Forms.TabPage SecondsPage;
+        private System.Windows.Forms.Label SecondsLabel;
+        private System.Windows.Forms.NumericUpDown SecondsUpDown;
+        private System.Windows.Forms.Label EveryLabel0;
     }
 }
 

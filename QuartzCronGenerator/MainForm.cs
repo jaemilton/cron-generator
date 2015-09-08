@@ -15,7 +15,11 @@ namespace QuartzCronGenerator
         {
             CronExpressionTextBox.Clear();
 
-            if (InputTabControl.SelectedTab == InputTabControl.TabPages["MinutesPage"])
+            if (InputTabControl.SelectedTab == InputTabControl.TabPages["SecondsPage"])
+            {
+                CronExpressionTextBox.Text = CronExpression.EveryNSeconds((int)SecondsUpDown.Value);
+            }
+            else if (InputTabControl.SelectedTab == InputTabControl.TabPages["MinutesPage"])
             {
                 CronExpressionTextBox.Text = CronExpression.EveryNMinutes((int)MinutesUpDown.Value);
             }
