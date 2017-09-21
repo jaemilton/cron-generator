@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>QuartzCronGenerator.Tests</RootNamespace>
     <AssemblyName>QuartzCronGenerator.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -46,7 +46,7 @@
     <Compile Include="Tests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\QuartzCronGenerator\QuartzCronGenerator.csproj">
+    <ProjectReference Include="..\_QuartzCronGenerator\_QuartzCronGenerator.csproj">
       <Project>{02b16919-a80f-4a10-8c77-5358cb652970}</Project>
       <Name>QuartzCronGenerator</Name>
     </ProjectReference>

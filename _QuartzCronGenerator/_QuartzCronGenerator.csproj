@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>QuartzCronGenerator</RootNamespace>
     <AssemblyName>QuartzCronGenerator</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -41,12 +41,6 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Months.cs" />
-    <Compile Include="CronExpression.cs" />
-    <Compile Include="CronExpressionType.cs" />
-    <Compile Include="DaySeqNumber.cs" />
-    <Compile Include="DaysOfWeek.cs" />
-    <Compile Include="CronConverter.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +72,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\QuartzCronGeneratorLibrary\QuartzCronGeneratorLibrary.csproj">
+      <Project>{4c500073-f0ce-41f3-b6d6-96e5083aa902}</Project>
+      <Name>QuartzCronGeneratorLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
