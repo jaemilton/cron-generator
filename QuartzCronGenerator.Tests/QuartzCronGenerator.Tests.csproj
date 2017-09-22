@@ -46,12 +46,6 @@
     <Compile Include="Tests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\_QuartzCronGenerator\_QuartzCronGenerator.csproj">
-      <Project>{02b16919-a80f-4a10-8c77-5358cb652970}</Project>
-      <Name>QuartzCronGenerator</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

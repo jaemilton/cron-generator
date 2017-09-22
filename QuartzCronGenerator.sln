@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuartzCronGenerator.Tests", "QuartzCronGenerator.Tests\QuartzCronGenerator.Tests.csproj", "{EC47820E-87CB-4758-ADEB-60269995608D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_QuartzCronGenerator", "_QuartzCronGenerator\_QuartzCronGenerator.csproj", "{02B16919-A80F-4A10-8C77-5358CB652970}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuartzCronGeneratorLibrary", "QuartzCronGeneratorLibrary\QuartzCronGeneratorLibrary.csproj", "{4C500073-F0CE-41F3-B6D6-96E5083AA902}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuartzCronGeneratorTool", "QuartzCronGeneratorTool\QuartzCronGeneratorTool.csproj", "{A9E5F625-B390-4F26-8B08-B110D4B05D71}"
@@ -20,10 +18,6 @@ Global
 		{EC47820E-87CB-4758-ADEB-60269995608D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EC47820E-87CB-4758-ADEB-60269995608D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC47820E-87CB-4758-ADEB-60269995608D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{02B16919-A80F-4A10-8C77-5358CB652970}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{02B16919-A80F-4A10-8C77-5358CB652970}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{02B16919-A80F-4A10-8C77-5358CB652970}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{02B16919-A80F-4A10-8C77-5358CB652970}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4C500073-F0CE-41F3-B6D6-96E5083AA902}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4C500073-F0CE-41F3-B6D6-96E5083AA902}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C500073-F0CE-41F3-B6D6-96E5083AA902}.Release|Any CPU.ActiveCfg = Release|Any CPU
