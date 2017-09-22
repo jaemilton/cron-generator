@@ -3,3 +3,4 @@ obj
 packages
 *.DotSettings.user
 *.suo
+.vs
