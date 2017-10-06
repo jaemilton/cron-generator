@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <Version>0.9.1</Version>
+    <Description>A library to build Cron expressions easily, useful to be used with CronSchedulers like Quartz.Net</Description>
+    <Authors>Paulo Hauck</Authors>
+    <Company />
+    <PackageId>CronGenerator</PackageId>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/paulohauck/quartz-cron-generator</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/paulohauck/quartz-cron-generator/LICENSE</PackageLicenseUrl>
+    <PackageIconUrl>https://github.com/paulohauck/quartz-cron-generator/raw/master/icon.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/paulohauck/quartz-cron-generator</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>CronMaker Quartz.Cron CronGenerator</PackageTags>
+    <PackageReleaseNotes>Inittial Relase</PackageReleaseNotes>
+  </PropertyGroup>
+
+</Project>

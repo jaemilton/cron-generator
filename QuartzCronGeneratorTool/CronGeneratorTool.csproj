@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\QuartzCronGeneratorLibrary\QuartzCronGeneratorLibrary.csproj" />
+    <ProjectReference Include="..\QuartzCronGeneratorLibrary\CronGenerator.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuartzCronGeneratorLibrary", "QuartzCronGeneratorLibrary\QuartzCronGeneratorLibrary.csproj", "{4C500073-F0CE-41F3-B6D6-96E5083AA902}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CronGenerator", "QuartzCronGeneratorLibrary\CronGenerator.csproj", "{4C500073-F0CE-41F3-B6D6-96E5083AA902}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuartzCronGeneratorTool", "QuartzCronGeneratorTool\QuartzCronGeneratorTool.csproj", "{A9E5F625-B390-4F26-8B08-B110D4B05D71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CronGeneratorTool", "QuartzCronGeneratorTool\CronGeneratorTool.csproj", "{A9E5F625-B390-4F26-8B08-B110D4B05D71}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuartzCronGeneratorLibrary.Tests", "QuartzCronGeneratorLibrary.Tests\QuartzCronGeneratorLibrary.Tests.csproj", "{A2CFE5A0-31DA-45EB-A809-3759A9512154}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CronGenerator.Tests", "QuartzCronGeneratorLibrary.Tests\CronGenerator.Tests.csproj", "{A2CFE5A0-31DA-45EB-A809-3759A9512154}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
