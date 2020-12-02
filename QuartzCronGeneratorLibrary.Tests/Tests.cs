@@ -9,9 +9,9 @@ namespace QuartzCronGeneratorLibrary.Tests
         [Fact]
         public void TestEveryNSeconds()
         {
-            var ce1 = CronExpressionGenerator.EveryNSeconds(1);
-            var ce2 = CronExpressionGenerator.EveryNSeconds(59);
-            var ce3 = CronExpressionGenerator.EveryNSeconds(3600);
+            var ce1 = QuartzCronExpression.EveryNSeconds(1);
+            var ce2 = QuartzCronExpression.EveryNSeconds(59);
+            var ce3 = QuartzCronExpression.EveryNSeconds(3600);
 
             Assert.Equal("0/1 * * 1/1 * ? *", ce1);
             Assert.Equal("0/59 * * 1/1 * ? *", ce2);
@@ -21,9 +21,9 @@ namespace QuartzCronGeneratorLibrary.Tests
         [Fact]
         public void TestEveryNMinutes()
         {
-            var ce1 = CronExpressionGenerator.EveryNMinutes(1);
-            var ce2 = CronExpressionGenerator.EveryNMinutes(59);
-            var ce3 = CronExpressionGenerator.EveryNMinutes(3600);
+            var ce1 = QuartzCronExpression.EveryNMinutes(1);
+            var ce2 = QuartzCronExpression.EveryNMinutes(59);
+            var ce3 = QuartzCronExpression.EveryNMinutes(3600);
 
             Assert.Equal("0 0/1 * 1/1 * ? *", ce1);
             Assert.Equal("0 0/59 * 1/1 * ? *", ce2);
@@ -33,9 +33,9 @@ namespace QuartzCronGeneratorLibrary.Tests
         [Fact]
         public void TestEveryNHours()
         {
-            var ce1 = CronExpressionGenerator.EveryNHours(1);
-            var ce2 = CronExpressionGenerator.EveryNHours(23);
-            var ce3 = CronExpressionGenerator.EveryNHours(72);
+            var ce1 = QuartzCronExpression.EveryNHours(1);
+            var ce2 = QuartzCronExpression.EveryNHours(23);
+            var ce3 = QuartzCronExpression.EveryNHours(72);
 
             Assert.Equal("0 0 0/1 1/1 * ? *", ce1);
             Assert.Equal("0 0 0/23 1/1 * ? *", ce2);
@@ -45,9 +45,9 @@ namespace QuartzCronGeneratorLibrary.Tests
         [Fact]
         public void TestEveryDayAt()
         {
-            var ce1 = CronExpressionGenerator.EveryDayAt(12, 0);
-            var ce2 = CronExpressionGenerator.EveryDayAt(7, 23);
-            var ce3 = CronExpressionGenerator.EveryDayAt(22, 22);
+            var ce1 = QuartzCronExpression.EveryDayAt(12, 0);
+            var ce2 = QuartzCronExpression.EveryDayAt(7, 23);
+            var ce3 = QuartzCronExpression.EveryDayAt(22, 22);
 
             Assert.Equal("0 0 12 1/1 * ? *", ce1);
             Assert.Equal("0 23 7 1/1 * ? *", ce2);
@@ -57,9 +57,9 @@ namespace QuartzCronGeneratorLibrary.Tests
         [Fact]
         public void TestEveryNDaysAt()
         {
-            var ce1 = CronExpressionGenerator.EveryNDaysAt(1, 12, 0);
-            var ce2 = CronExpressionGenerator.EveryNDaysAt(6, 7, 23);
-            var ce3 = CronExpressionGenerator.EveryNDaysAt(30, 22, 22);
+            var ce1 = QuartzCronExpression.EveryNDaysAt(1, 12, 0);
+            var ce2 = QuartzCronExpression.EveryNDaysAt(6, 7, 23);
+            var ce3 = QuartzCronExpression.EveryNDaysAt(30, 22, 22);
 
             Assert.Equal("0 0 12 1/1 * ? *", ce1);
             Assert.Equal("0 23 7 1/6 * ? *", ce2);
@@ -69,9 +69,9 @@ namespace QuartzCronGeneratorLibrary.Tests
         [Fact]
         public void TestEveryWeekDay()
         {
-            var ce1 = CronExpressionGenerator.EveryWeekDayAt(12, 0);
-            var ce2 = CronExpressionGenerator.EveryWeekDayAt(7, 23);
-            var ce3 = CronExpressionGenerator.EveryWeekDayAt(22, 22);
+            var ce1 = QuartzCronExpression.EveryWeekDayAt(12, 0);
+            var ce2 = QuartzCronExpression.EveryWeekDayAt(7, 23);
+            var ce3 = QuartzCronExpression.EveryWeekDayAt(22, 22);
 
             Assert.Equal("0 0 12 ? * MON-FRI *", ce1);
             Assert.Equal("0 23 7 ? * MON-FRI *", ce2);
@@ -81,13 +81,15 @@ namespace QuartzCronGeneratorLibrary.Tests
         [Fact]
         public void TestEverySpecificWeekDayAt()
         {
-            var ce1 = CronExpressionGenerator.EverySpecificWeekDayAt(12, 0, DaysOfWeek.Monday);
-            var ce2 = CronExpressionGenerator.EverySpecificWeekDayAt(7, 23, DaysOfWeek.Monday | DaysOfWeek.Wednesday | DaysOfWeek.Friday);
-            var ce3 = CronExpressionGenerator.EverySpecificWeekDayAt(22, 22, DaysOfWeek.Saturday | DaysOfWeek.Sunday);
+            var ce1 = QuartzCronExpression.EverySpecificWeekDayAt(12, 0, DaysOfWeek.Monday);
+            var ce2 = QuartzCronExpression.EverySpecificWeekDayAt(7, 23, DaysOfWeek.Monday | DaysOfWeek.Wednesday | DaysOfWeek.Friday);
+            var ce3 = QuartzCronExpression.EverySpecificWeekDayAt(22, 22, DaysOfWeek.Saturday | DaysOfWeek.Sunday);
+            var ce4 = QuartzCronExpression.EverySpecificWeekDayAt(5, 20, DaysOfWeek.Thursday | DaysOfWeek.Tuesday);
 
             Assert.Equal("0 0 12 ? * MON *", ce1);
             Assert.Equal("0 23 7 ? * MON,WED,FRI *", ce2);
             Assert.Equal("0 22 22 ? * SAT,SUN *", ce3);
+            Assert.Equal("0 20 5 ? * TUE,THU *", ce4);
         }
 
         [Fact]
@@ -110,9 +112,9 @@ namespace QuartzCronGeneratorLibrary.Tests
         [Fact]
         public void TestEverySpecificDayEveryNMonthAt()
         {
-            var ce1 = CronExpressionGenerator.EverySpecificDayEveryNMonthAt(1, 1, 12, 0);
-            var ce2 = CronExpressionGenerator.EverySpecificDayEveryNMonthAt(7, 3, 7, 15);
-            var ce3 = CronExpressionGenerator.EverySpecificDayEveryNMonthAt(28, 6, 21, 30);
+            var ce1 = QuartzCronExpression.EverySpecificDayEveryNMonthAt(1, 1, 12, 0);
+            var ce2 = QuartzCronExpression.EverySpecificDayEveryNMonthAt(7, 3, 7, 15);
+            var ce3 = QuartzCronExpression.EverySpecificDayEveryNMonthAt(28, 6, 21, 30);
 
             Assert.Equal("0 0 12 1 1/1 ? *", ce1);
             Assert.Equal("0 15 7 7 1/3 ? *", ce2);
@@ -122,10 +124,10 @@ namespace QuartzCronGeneratorLibrary.Tests
         [Fact]
         public void TestEverySpecificSeqWeekDayEveryNMonthAt()
         {
-            var ce1 = CronExpressionGenerator.EverySpecificSeqWeekDayEveryNMonthAt(DaySeqNumber.First, DaysOfWeek.Monday, 1, 12, 0);
-            var ce2 = CronExpressionGenerator.EverySpecificSeqWeekDayEveryNMonthAt(DaySeqNumber.Second, DaysOfWeek.Wednesday, 3, 7, 15);
-            var ce3 = CronExpressionGenerator.EverySpecificSeqWeekDayEveryNMonthAt(DaySeqNumber.Third, DaysOfWeek.Friday, 6, 21, 30);
-            var ce4 = CronExpressionGenerator.EverySpecificSeqWeekDayEveryNMonthAt(DaySeqNumber.Fourth, DaysOfWeek.Sunday, 77, 22, 45);
+            var ce1 = QuartzCronExpression.EverySpecificSeqWeekDayEveryNMonthAt(DaySeqNumber.First, DaysOfWeek.Monday, 1, 12, 0);
+            var ce2 = QuartzCronExpression.EverySpecificSeqWeekDayEveryNMonthAt(DaySeqNumber.Second, DaysOfWeek.Wednesday, 3, 7, 15);
+            var ce3 = QuartzCronExpression.EverySpecificSeqWeekDayEveryNMonthAt(DaySeqNumber.Third, DaysOfWeek.Friday, 6, 21, 30);
+            var ce4 = QuartzCronExpression.EverySpecificSeqWeekDayEveryNMonthAt(DaySeqNumber.Fourth, DaysOfWeek.Sunday, 77, 22, 45);
 
             Assert.Equal("0 0 12 ? 1/1 MON#1 *", ce1);
             Assert.Equal("0 15 7 ? 1/3 WED#2 *", ce2);
@@ -136,10 +138,10 @@ namespace QuartzCronGeneratorLibrary.Tests
         [Fact]
         public void TestEverySpecificDayOfMonthAt()
         {
-            var ce1 = CronExpressionGenerator.EverySpecificDayOfMonthAt(Months.January, 1, 12, 0);
-            var ce2 = CronExpressionGenerator.EverySpecificDayOfMonthAt(Months.February, 3, 15, 17);
-            var ce3 = CronExpressionGenerator.EverySpecificDayOfMonthAt(Months.August, 13, 20, 45);
-            var ce4 = CronExpressionGenerator.EverySpecificDayOfMonthAt(Months.December, 16, 23, 59);
+            var ce1 = QuartzCronExpression.EverySpecificDayOfMonthAt(Months.January, 1, 12, 0);
+            var ce2 = QuartzCronExpression.EverySpecificDayOfMonthAt(Months.February, 3, 15, 17);
+            var ce3 = QuartzCronExpression.EverySpecificDayOfMonthAt(Months.August, 13, 20, 45);
+            var ce4 = QuartzCronExpression.EverySpecificDayOfMonthAt(Months.December, 16, 23, 59);
 
             Assert.Equal("0 0 12 1 1 ? *", ce1);
             Assert.Equal("0 17 15 3 2 ? *", ce2);
@@ -150,10 +152,10 @@ namespace QuartzCronGeneratorLibrary.Tests
         [Fact]
         public void TestEverySpecificSeqWeekDayOfMonthAt()
         {
-            var ce1 = CronExpressionGenerator.EverySpecificSeqWeekDayOfMonthAt(DaySeqNumber.First, DaysOfWeek.Monday, Months.January, 12, 0);
-            var ce2 = CronExpressionGenerator.EverySpecificSeqWeekDayOfMonthAt(DaySeqNumber.Second, DaysOfWeek.Wednesday, Months.February, 7, 15);
-            var ce3 = CronExpressionGenerator.EverySpecificSeqWeekDayOfMonthAt(DaySeqNumber.Third, DaysOfWeek.Friday, Months.August, 21, 30);
-            var ce4 = CronExpressionGenerator.EverySpecificSeqWeekDayOfMonthAt(DaySeqNumber.Fourth, DaysOfWeek.Sunday, Months.December, 22, 45);
+            var ce1 = QuartzCronExpression.EverySpecificSeqWeekDayOfMonthAt(DaySeqNumber.First, DaysOfWeek.Monday, Months.January, 12, 0);
+            var ce2 = QuartzCronExpression.EverySpecificSeqWeekDayOfMonthAt(DaySeqNumber.Second, DaysOfWeek.Wednesday, Months.February, 7, 15);
+            var ce3 = QuartzCronExpression.EverySpecificSeqWeekDayOfMonthAt(DaySeqNumber.Third, DaysOfWeek.Friday, Months.August, 21, 30);
+            var ce4 = QuartzCronExpression.EverySpecificSeqWeekDayOfMonthAt(DaySeqNumber.Fourth, DaysOfWeek.Sunday, Months.December, 22, 45);
 
             Assert.Equal("0 0 12 ? 1 MON#1 *", ce1);
             Assert.Equal("0 15 7 ? 2 WED#2 *", ce2);
@@ -164,10 +166,10 @@ namespace QuartzCronGeneratorLibrary.Tests
         [Fact]
         public void TestSpecificDateAt()
         {
-            var ce1 = CronExpressionGenerator.SpecificDateAt(new System.DateTime(2020, 12, 1, 8, 30, 0));
-            var ce2 = CronExpressionGenerator.SpecificDateAt(new System.DateTime(2019, 1, 1, 0, 0, 0));
-            var ce3 = CronExpressionGenerator.SpecificDateAt(new System.DateTime(2022, 2, 27, 9, 0, 0));
-            var ce4 = CronExpressionGenerator.SpecificDateAt(new System.DateTime(2015, 5, 1, 7, 0, 30));
+            var ce1 = QuartzCronExpression.SpecificDateAt(new System.DateTime(2020, 12, 1, 8, 30, 0));
+            var ce2 = QuartzCronExpression.SpecificDateAt(new System.DateTime(2019, 1, 1, 0, 0, 0));
+            var ce3 = QuartzCronExpression.SpecificDateAt(new System.DateTime(2022, 2, 27, 9, 0, 0));
+            var ce4 = QuartzCronExpression.SpecificDateAt(new System.DateTime(2015, 5, 1, 7, 0, 30));
 
             Assert.Equal("0 30 8 1 12 ? 2020", ce1);
             Assert.Equal("0 0 0 1 1 ? 2019", ce2);
