@@ -2,15 +2,15 @@
 <package >
   <metadata>
     <id>.\QuartzCronGeneratorLibrary.dll</id>
-    <version>0.9.1</version>
-    <authors>Paulo Hauck</authors>
-    <owners>Paulo Hauck</owners>
-    <licenseUrl>https://github.com/paulohauck/quartz-cron-generator/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/paulohauck/quartz-cron-generator</projectUrl>
-    <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>
+    <version>1.0.0</version>
+    <authors>Jaemilton Oliveira</authors>
+    <owners>Jaemilton Oliveira</owners>
+    <licenseUrl>https://github.com/jaemilton/cron-generator/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/jaemilton/cron-generator</projectUrl>
+    <iconUrl>https://github.com/jaemilton/cron-generator/blob/master/icon.png?raw=true</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A library to build Cron strings easily, useful to be used with CronSchedulers like Quartz.Net</description>
-    <releaseNotes>Inittial Release.</releaseNotes>
+    <releaseNotes>Inittial Release, forked from https://github.com/subterraneanbob/quartz-cron-generator to add dotnet standard 1.0 compatibility </releaseNotes>
     <copyright>Copyright 2017</copyright>
     <tags>CronMaker Quartz.Cron</tags>
     <dependencies>
