@@ -4,12 +4,15 @@ namespace QuartzCronGenerator
 {
     public class CronExpression
     {
-        private readonly DaysOfWeek _days;
+        private readonly DaysOfWeek _daysOfWeek;
         private readonly Months _month;
         private readonly int _interval;
+        private readonly DaySeqNumber _daySeqNumber;
         private readonly int _dayNumber;
         private readonly int _startHour;
         private readonly int _startMinute;
+        private readonly int _yearNumber;
+        private readonly int _startSecond;
 
         private readonly CronExpressionType _expressionType;
         private string _cronString;
@@ -27,38 +30,42 @@ namespace QuartzCronGenerator
                     _cronString = string.Format("0/{0} * * 1/1 * ? *", _interval);
                     break;
                 case CronExpressionType.EveryNMinutes:
-                    _cronString = string.Format("0 0/{0} * 1/1 * ? *", _interval);
+                    _cronString = $"0 0/{_interval} * 1/1 * ? *";
                     break;
                 case CronExpressionType.EveryNHours:
-                    _cronString = string.Format("0 0 0/{0} 1/1 * ? *", _interval);
+                    _cronString = $"0 0 0/{_interval} 1/1 * ? *";
                     break;
                 case CronExpressionType.EveryNDaysAt:
                 case CronExpressionType.EveryDayAt:
-                    _cronString = string.Format("0 {0} {1} 1/{2} * ? *", _startMinute, _startHour, _interval);
+                    _cronString = $"0 {_startMinute} {_startHour} 1/{_interval} * ? *";
                     break;
                 case CronExpressionType.EveryWeekDay:
-                    _cronString = string.Format("0 {0} {1} ? * MON-FRI *", _startMinute, _startHour);
+                    _cronString = $"0 {_startMinute} {_startHour} ? * MON-FRI *";
                     break;
                 case CronExpressionType.EverySpecificWeekDayAt:
-                    _cronString = string.Format("0 {0} {1} ? * {2} *", _startMinute, _startHour, CronConverter.ToCronRepresentation(_days));
+                    _cronString = $"0 {_startMinute} {_startHour} ? * {CronConverter.ToCronRepresentation(_daysOfWeek)} *";
                     break;
                 case CronExpressionType.EverySpecificDayEveryNMonthAt:
-                    _cronString = string.Format("0 {0} {1} {2} 1/{3} ? *", _startMinute, _startHour, _dayNumber, _interval);
+                    _cronString = $"0 {_startMinute} {_startHour} {_dayNumber} 1/{_interval} ? *";
                     break;
                 case CronExpressionType.EverySpecificSeqWeekDayEveryNMonthAt:
-                    _cronString = string.Format("0 {0} {1} ? 1/{2} {3}#{4} *", _startMinute, _startHour, _interval, CronConverter.ToCronRepresentationSingle(_days), _dayNumber);
+                    _cronString = $"0 {_startMinute} {_startHour} ? 1/{_interval} {CronConverter.ToCronRepresentationSingle(_daysOfWeek)}#{(int)_daySeqNumber} *";
                     break;
                 case CronExpressionType.EverySpecificDayOfMonthAt:
-                    _cronString = string.Format("0 {0} {1} {2} {3} ? *", _startMinute, _startHour, _dayNumber, (int)_month);
+                    _cronString = $"0 {_startMinute} {_startHour} {(int)_daySeqNumber} {(int)_month} ? *";
                     break;
                 case CronExpressionType.EverySpecificSeqWeekDayOfMonthAt:
-                    _cronString = string.Format("0 {0} {1} ? {2} {3}#{4} *", _startMinute, _startHour, (int)_month, CronConverter.ToCronRepresentationSingle(_days), _dayNumber);
+                    _cronString = $"0 {_startMinute} {_startHour} ? {(int)_month} {CronConverter.ToCronRepresentationSingle(_daysOfWeek)}#{(int)_daySeqNumber} *";
+                    break;
+                case CronExpressionType.SpecificDateAt:
+                    _cronString = $"{_startSecond} {_startMinute} {_startHour} {_dayNumber} {(int)_month} ? {_yearNumber}";
                     break;
                 default:
                     throw new ArgumentException();
             }
         }
 
+        #region "Protected Contructors"
         protected CronExpression(int interval, CronExpressionType expressionType)
         {
             _interval = interval;
@@ -86,9 +93,9 @@ namespace QuartzCronGenerator
             BuildCronExpression();
         }
 
-        protected CronExpression(DaysOfWeek days, int startHour, int startMinute, CronExpressionType expressionType)
+        protected CronExpression(DaysOfWeek daysOfWeek, int startHour, int startMinute, CronExpressionType expressionType)
         {
-            _days = days;
+            _daysOfWeek = daysOfWeek;
             _startHour = startHour;
             _startMinute = startMinute;
             _expressionType = expressionType;
@@ -107,10 +114,10 @@ namespace QuartzCronGenerator
             BuildCronExpression();
         }
 
-        protected CronExpression(DaySeqNumber dayNumber, DaysOfWeek days, int monthInverval, int startHour, int startMinute, CronExpressionType expressionType)
+        protected CronExpression(DaySeqNumber daySeqNumber, DaysOfWeek daysOfWeek, int monthInverval, int startHour, int startMinute, CronExpressionType expressionType)
         {
-            _dayNumber = (int)dayNumber;
-            _days = days;
+            _daySeqNumber = daySeqNumber;
+            _daysOfWeek = daysOfWeek;
             _interval = monthInverval;
             _startHour = startHour;
             _startMinute = startMinute;
@@ -130,10 +137,10 @@ namespace QuartzCronGenerator
             BuildCronExpression();
         }
 
-        protected CronExpression(DaySeqNumber dayNumber, DaysOfWeek days, Months month, int startHour, int startMinute, CronExpressionType expressionType)
+        protected CronExpression(DaySeqNumber dayNumber, DaysOfWeek daysOfWeek, Months month, int startHour, int startMinute, CronExpressionType expressionType)
         {
-            _dayNumber = (int)dayNumber;
-            _days = days;
+            _daySeqNumber = dayNumber;
+            _daysOfWeek = daysOfWeek;
             _month = month;
             _startHour = startHour;
             _startMinute = startMinute;
@@ -142,17 +149,30 @@ namespace QuartzCronGenerator
             BuildCronExpression();
         }
 
+        protected CronExpression(int secondNumber, int startMinute, int startHour, int dayNumber, int monthNumber, int yearNumber, CronExpressionType expressionType)
+        {
+            _startSecond = secondNumber;
+            _startMinute = startMinute;
+            _startHour = startHour;
+            _dayNumber = dayNumber;
+            _month = (Months)monthNumber;
+            _yearNumber = yearNumber;
+            _expressionType = expressionType;
+
+            BuildCronExpression();
+        }
+        #endregion "Protected Contructors"
+
         /// <summary>
-        /// Create new CronExpression instance, which occurs every *secondsInteval* seconds
+        /// Create new CronExpression instance, which occurs every *secondInteval* seconds
         /// </summary>
         /// <param name="secondsInteval">Interval in seconds</param>
-        /// <returns>New CronExpression instance</returns>
+        /// <returns></returns>
         public static CronExpression EveryNSeconds(int secondsInteval)
         {
             var ce = new CronExpression(secondsInteval, CronExpressionType.EveryNSeconds);
             return ce;
         }
-
 
         /// <summary>
         /// Create new CronExpression instance, which occurs every *minutesInteval* minutes
@@ -253,9 +273,9 @@ namespace QuartzCronGenerator
         /// <param name="hour">Hour, when occurence will happen</param>
         /// <param name="minute">Minute, when occurence will happen</param>
         /// <returns>New CronExpression instance</returns>
-        public static CronExpression EverySpecificSeqWeekDayEveryNMonthAt(DaySeqNumber dayNumber, DaysOfWeek days, int monthInverval, int hour, int minute)
+        public static CronExpression EverySpecificSeqWeekDayEveryNMonthAt(DaySeqNumber daySeqNumber, DaysOfWeek days, int monthInverval, int hour, int minute)
         {
-            var ce = new CronExpression(dayNumber, days, monthInverval, hour, minute, CronExpressionType.EverySpecificSeqWeekDayEveryNMonthAt);
+            var ce = new CronExpression(daySeqNumber, days, monthInverval, hour, minute, CronExpressionType.EverySpecificSeqWeekDayEveryNMonthAt);
             return ce;
         }
 
@@ -288,6 +308,25 @@ namespace QuartzCronGenerator
         public static CronExpression EverySpecificSeqWeekDayOfMonthAt(DaySeqNumber dayNumber, DaysOfWeek days, Months month, int hour, int minute)
         {
             var ce = new CronExpression(dayNumber, days, month, hour, minute, CronExpressionType.EverySpecificSeqWeekDayOfMonthAt);
+            return ce;
+        }
+
+        /// <summary>
+        /// Create new CronExpression instance, which occurs on specicf day 
+        /// at specified hours
+        /// </summary>
+        /// <param name="dateTime">Date and time</param>
+        /// <returns>New CronExpression instance</returns>
+        public static CronExpression SpecificDateAt(DateTime dateTime)
+        {
+            var ce = new CronExpression(
+                dateTime.Second,
+                dateTime.Minute,
+                dateTime.Hour,
+                dateTime.Day,
+                dateTime.Month,
+                dateTime.Year,
+                CronExpressionType.SpecificDateAt);
             return ce;
         }
 

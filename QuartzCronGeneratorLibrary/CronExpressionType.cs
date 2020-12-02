@@ -13,5 +13,6 @@
         EverySpecificSeqWeekDayEveryNMonthAt,
         EverySpecificDayOfMonthAt,
         EverySpecificSeqWeekDayOfMonthAt,
+        SpecificDateAt
     }
 }

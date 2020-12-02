@@ -160,5 +160,19 @@ namespace QuartzCronGeneratorLibrary.Tests
             Assert.Equal("0 30 21 ? 8 FRI#3 *", ce3);
             Assert.Equal("0 45 22 ? 12 SUN#4 *", ce4);
         }
+
+        [Fact]
+        public void TestSpecificDateAt()
+        {
+            var ce1 = CronExpression.SpecificDateAt(new System.DateTime(2020, 12, 1, 8, 30, 0));
+            var ce2 = CronExpression.SpecificDateAt(new System.DateTime(2019, 1, 1, 0, 0, 0));
+            var ce3 = CronExpression.SpecificDateAt(new System.DateTime(2022, 2, 27, 9, 0, 0));
+            var ce4 = CronExpression.SpecificDateAt(new System.DateTime(2015, 5, 1, 7, 0, 30));
+
+            Assert.Equal("0 30 8 1 12 ? 2020", ce1);
+            Assert.Equal("0 0 0 1 1 ? 2019", ce2);
+            Assert.Equal("0 0 9 27 2 ? 2022", ce3);
+            Assert.Equal("30 0 7 1 5 ? 2015", ce4);
+        }
     }
 }

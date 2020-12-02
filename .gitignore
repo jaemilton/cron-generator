@@ -4,3 +4,4 @@ packages
 *.DotSettings.user
 *.suo
 .vs
+TestResults
