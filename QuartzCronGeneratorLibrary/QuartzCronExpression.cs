@@ -27,7 +27,7 @@ namespace QuartzCronGenerator
             switch (ExpressionType)
             {
                 case CronExpressionType.EveryNSeconds:
-                    _cronString = string.Format("0/{0} * * 1/1 * ? *", _interval);
+                    _cronString = $"0/{_interval} * * 1/1 * ? *";
                     break;
                 case CronExpressionType.EveryNMinutes:
                     _cronString = $"0 0/{_interval} * 1/1 * ? *";
