@@ -29,6 +29,41 @@ namespace QuartzCronGenerator
             }
         }
 
+
+        public static string ToCronRepresentationSingle(Months month)
+        {
+            switch (month)
+            {
+                case Months.January:
+                    return "JAN";
+                case Months.February:
+                    return "FEB";
+                case Months.March:
+                    return "MAR";
+                case Months.April:
+                    return "APR";
+                case Months.May:
+                    return "MAY";
+                case Months.June:
+                    return "JUN";
+                case Months.July:
+                    return "JUL";
+                case Months.August:
+                    return "AUG";
+                case Months.September:
+                    return "SEP";
+                case Months.October:
+                    return "OCT";
+                case Months.November:
+                    return "NOV";
+                case Months.December:
+                    return "DEC";
+                default:
+                    throw new ArgumentException();
+            }
+            
+        }
+
         /// <summary>
         /// Converts enumerator DaysOfWeek into string representation
         /// like "MON, TUE, WED"
@@ -43,6 +78,23 @@ namespace QuartzCronGenerator
         public static IEnumerable<DaysOfWeek> GetFlags(DaysOfWeek days)
         {
             return Enum.GetValues(days.GetType()).Cast<DaysOfWeek>().Where(v => days.HasFlag(v));
+        }
+
+
+        /// <summary>
+        /// Converts enumerator Months into string representation
+        /// like "JAN, FEB, MAR"
+        /// </summary>
+        /// <param name="days">Enumerator to convert</param>
+        /// <returns>String representation</returns>
+        public static string ToCronRepresentation(Months months)
+        {
+            return String.Join(",", GetFlags(months).Select(ToCronRepresentationSingle));
+        }
+
+        public static IEnumerable<Months> GetFlags(Months months)
+        {
+            return Enum.GetValues(months.GetType()).Cast<Months>().Where(v => months.HasFlag(v));
         }
     }
 }

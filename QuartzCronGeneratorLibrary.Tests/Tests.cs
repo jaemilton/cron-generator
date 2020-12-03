@@ -163,6 +163,39 @@ namespace QuartzCronGeneratorLibrary.Tests
             Assert.Equal("0 45 22 ? 12 SUN#4 *", ce4);
         }
 
+
+        [Fact]
+        public void TestMothsRepresentation()
+        {
+            var monString = CronConverter.ToCronRepresentationSingle(Months.June);
+            Assert.Equal("JUN", monString);
+
+            const Months months = Months.January | Months.March | Months.June;
+            var monthsList = new List<Months> { Months.January , Months.March , Months.June };
+            Assert.Equal(monthsList, CronConverter.GetFlags(months));
+
+            const string expectedString = "JAN,MAR,JUN";
+            Assert.Equal(expectedString, CronConverter.ToCronRepresentation(months));
+
+            const string exprectedString2 = "JAN,DEC";
+            Assert.Equal(exprectedString2, CronConverter.ToCronRepresentation(Months.December | Months.January));
+        }
+
+
+        [Fact]
+        public void TestEverySpecificDayOfSpecificMonthAt()
+        {
+            var ce1 = QuartzCronExpression.EverySpecificDayOfSpecificMonthAt(1, Months.April, 10, 0);
+            var ce2 = QuartzCronExpression.EverySpecificDayOfSpecificMonthAt(3, Months.January | Months.July, 3, 0);
+            var ce3 = QuartzCronExpression.EverySpecificDayOfSpecificMonthAt(6, Months.December | Months.January, 1, 10);
+            var ce4 = QuartzCronExpression.EverySpecificDayOfSpecificMonthAt(25, Months.January | Months.March | Months.June | Months.September, 23, 0);
+
+            Assert.Equal("0 0 10 1 APR ? *", ce1);
+            Assert.Equal("0 0 3 3 JAN,JUL ? *", ce2);
+            Assert.Equal("0 10 1 6 JAN,DEC ? *", ce3);
+            Assert.Equal("0 0 23 25 JAN,MAR,JUN,SEP ? *", ce4);
+        }
+
         [Fact]
         public void TestSpecificDateAt()
         {
