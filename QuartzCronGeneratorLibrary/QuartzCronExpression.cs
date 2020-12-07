@@ -51,17 +51,14 @@ namespace QuartzCronGenerator
                 case CronExpressionType.EverySpecificSeqWeekDayEveryNMonthAt:
                     _cronString = $"0 {_startMinute} {_startHour} ? 1/{_interval} {CronConverter.ToCronRepresentationSingle(_daysOfWeek)}#{(int)_daySeqNumber} *";
                     break;
-                case CronExpressionType.EverySpecificDayOfMonthAt:
-                    _cronString = $"0 {_startMinute} {_startHour} {(int)_daySeqNumber} {(int)_months} ? *";
-                    break;
-                case CronExpressionType.EverySpecificSeqWeekDayOfMonthAt:
-                    _cronString = $"0 {_startMinute} {_startHour} ? {(int)_months} {CronConverter.ToCronRepresentationSingle(_daysOfWeek)}#{(int)_daySeqNumber} *";
-                    break;
-                case CronExpressionType.EverySpecificDayOfSpecificMonthAt:
+                case CronExpressionType.EverySpecificDayOfMonthsAt:
                     _cronString = $"0 {_startMinute} {_startHour} {_dayNumber} {CronConverter.ToCronRepresentation(_months)} ? *";
                     break;
+                case CronExpressionType.EverySpecificSeqWeekDayOfMonthsAt:
+                    _cronString = $"0 {_startMinute} {_startHour} ? {CronConverter.ToCronRepresentation(_months)} {CronConverter.ToCronRepresentationSingle(_daysOfWeek)}#{(int)_daySeqNumber} *";
+                    break;
                 case CronExpressionType.SpecificDateAt:
-                    _cronString = $"{_startSecond} {_startMinute} {_startHour} {_dayNumber} {(int)_months} ? {_yearNumber}";
+                    _cronString = $"{_startSecond} {_startMinute} {_startHour} {_dayNumber} {CronConverter.ToCronRepresentation(_months)} ? {_yearNumber}";
                     break;
                 default:
                     throw new ArgumentException();
@@ -129,9 +126,9 @@ namespace QuartzCronGenerator
             BuildCronExpression();
         }
 
-        protected QuartzCronExpression(Months month, int dayNumber, int startHour, int startMinute, CronExpressionType expressionType)
+        protected QuartzCronExpression(Months months, int dayNumber, int startHour, int startMinute, CronExpressionType expressionType)
         {
-            _months = month;
+            _months = months;
             _dayNumber = dayNumber;
             _startHour = startHour;
             _startMinute = startMinute;
@@ -169,7 +166,7 @@ namespace QuartzCronGenerator
             _startMinute = startMinute;
             _startHour = startHour;
             _dayNumber = dayNumber;
-            _months = (Months)monthNumber;
+            _months = MonthsHelper.GetfromMonthNumber(monthNumber);
             _yearNumber = yearNumber;
             _expressionType = expressionType;
 
@@ -304,7 +301,7 @@ namespace QuartzCronGenerator
         /// <returns>New CronExpression instance</returns>
         public static QuartzCronExpression EverySpecificDayOfMonthAt(Months month, int dayNumber, int hour, int minute)
         {
-            var ce = new QuartzCronExpression(month, dayNumber, hour, minute, CronExpressionType.EverySpecificDayOfMonthAt);
+            var ce = new QuartzCronExpression(month, dayNumber, hour, minute, CronExpressionType.EverySpecificDayOfMonthsAt);
             return ce;
         }
 
@@ -321,28 +318,7 @@ namespace QuartzCronGenerator
         /// <returns>New CronExpression instance</returns>
         public static QuartzCronExpression EverySpecificSeqWeekDayOfMonthAt(DaySeqNumber dayNumber, DaysOfWeek days, Months month, int hour, int minute)
         {
-            var ce = new QuartzCronExpression(dayNumber, days, month, hour, minute, CronExpressionType.EverySpecificSeqWeekDayOfMonthAt);
-            return ce;
-        }
-
-        /// <summary>
-        /// Create new CronExpression instance, which occurs on specific day of specified months
-        /// at specific hour
-        /// </summary>
-        /// <param name="dayNumber">day number</param>
-        /// <param name="months">month(s)</param>
-        /// <param name="startHour">Hour, when occurence will happen</param>
-        /// <param name="startMinute">Minute, when occurence will happen</param>
-        /// <returns></returns>
-        public static QuartzCronExpression EverySpecificDayOfSpecificMonthAt(int dayNumber, Months months, int startHour, int startMinute)
-        {
-            
-            var ce = new QuartzCronExpression(
-                dayNumber,
-                months,
-                startHour,
-                startMinute,
-                CronExpressionType.EverySpecificDayOfSpecificMonthAt);
+            var ce = new QuartzCronExpression(dayNumber, days, month, hour, minute, CronExpressionType.EverySpecificSeqWeekDayOfMonthsAt);
             return ce;
         }
 

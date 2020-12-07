@@ -88,7 +88,7 @@ namespace QuartzCronGeneratorLibrary.Tests
 
             Assert.Equal("0 0 12 ? * MON *", ce1);
             Assert.Equal("0 23 7 ? * MON,WED,FRI *", ce2);
-            Assert.Equal("0 22 22 ? * SAT,SUN *", ce3);
+            Assert.Equal("0 22 22 ? * SUN,SAT *", ce3);
             Assert.Equal("0 20 5 ? * TUE,THU *", ce4);
         }
 
@@ -105,7 +105,7 @@ namespace QuartzCronGeneratorLibrary.Tests
             const string expectedString = "MON,WED,FRI";
             Assert.Equal(expectedString, CronConverter.ToCronRepresentation(days));
 
-            const string exprectedString2 = "SAT,SUN";
+            const string exprectedString2 = "SUN,SAT";
             Assert.Equal(exprectedString2, CronConverter.ToCronRepresentation(DaysOfWeek.Saturday | DaysOfWeek.Sunday));
         }
 
@@ -135,20 +135,7 @@ namespace QuartzCronGeneratorLibrary.Tests
             Assert.Equal("0 45 22 ? 1/77 SUN#4 *", ce4);
         }
 
-        [Fact]
-        public void TestEverySpecificDayOfMonthAt()
-        {
-            var ce1 = QuartzCronExpression.EverySpecificDayOfMonthAt(Months.January, 1, 12, 0);
-            var ce2 = QuartzCronExpression.EverySpecificDayOfMonthAt(Months.February, 3, 15, 17);
-            var ce3 = QuartzCronExpression.EverySpecificDayOfMonthAt(Months.August, 13, 20, 45);
-            var ce4 = QuartzCronExpression.EverySpecificDayOfMonthAt(Months.December, 16, 23, 59);
-
-            Assert.Equal("0 0 12 1 1 ? *", ce1);
-            Assert.Equal("0 17 15 3 2 ? *", ce2);
-            Assert.Equal("0 45 20 13 8 ? *", ce3);
-            Assert.Equal("0 59 23 16 12 ? *", ce4);
-        }
-
+  
         [Fact]
         public void TestEverySpecificSeqWeekDayOfMonthAt()
         {
@@ -157,10 +144,10 @@ namespace QuartzCronGeneratorLibrary.Tests
             var ce3 = QuartzCronExpression.EverySpecificSeqWeekDayOfMonthAt(DaySeqNumber.Third, DaysOfWeek.Friday, Months.August, 21, 30);
             var ce4 = QuartzCronExpression.EverySpecificSeqWeekDayOfMonthAt(DaySeqNumber.Fourth, DaysOfWeek.Sunday, Months.December, 22, 45);
 
-            Assert.Equal("0 0 12 ? 1 MON#1 *", ce1);
-            Assert.Equal("0 15 7 ? 2 WED#2 *", ce2);
-            Assert.Equal("0 30 21 ? 8 FRI#3 *", ce3);
-            Assert.Equal("0 45 22 ? 12 SUN#4 *", ce4);
+            Assert.Equal("0 0 12 ? JAN MON#1 *", ce1);
+            Assert.Equal("0 15 7 ? FEB WED#2 *", ce2);
+            Assert.Equal("0 30 21 ? AUG FRI#3 *", ce3);
+            Assert.Equal("0 45 22 ? DEC SUN#4 *", ce4);
         }
 
 
@@ -183,12 +170,12 @@ namespace QuartzCronGeneratorLibrary.Tests
 
 
         [Fact]
-        public void TestEverySpecificDayOfSpecificMonthAt()
+        public void TestEverySpecificDayOfMonthAt()
         {
-            var ce1 = QuartzCronExpression.EverySpecificDayOfSpecificMonthAt(1, Months.April, 10, 0);
-            var ce2 = QuartzCronExpression.EverySpecificDayOfSpecificMonthAt(3, Months.January | Months.July, 3, 0);
-            var ce3 = QuartzCronExpression.EverySpecificDayOfSpecificMonthAt(6, Months.December | Months.January, 1, 10);
-            var ce4 = QuartzCronExpression.EverySpecificDayOfSpecificMonthAt(25, Months.January | Months.March | Months.June | Months.September, 23, 0);
+            var ce1 = QuartzCronExpression.EverySpecificDayOfMonthAt(Months.April, 1, 10, 0);
+            var ce2 = QuartzCronExpression.EverySpecificDayOfMonthAt(Months.January | Months.July, 3, 3, 0);
+            var ce3 = QuartzCronExpression.EverySpecificDayOfMonthAt(Months.December | Months.January, 6, 1, 10);
+            var ce4 = QuartzCronExpression.EverySpecificDayOfMonthAt(Months.January | Months.March | Months.June | Months.September, 25, 23, 0);
 
             Assert.Equal("0 0 10 1 APR ? *", ce1);
             Assert.Equal("0 0 3 3 JAN,JUL ? *", ce2);
@@ -199,15 +186,31 @@ namespace QuartzCronGeneratorLibrary.Tests
         [Fact]
         public void TestSpecificDateAt()
         {
-            var ce1 = QuartzCronExpression.SpecificDateAt(new System.DateTime(2020, 12, 1, 8, 30, 0));
-            var ce2 = QuartzCronExpression.SpecificDateAt(new System.DateTime(2019, 1, 1, 0, 0, 0));
-            var ce3 = QuartzCronExpression.SpecificDateAt(new System.DateTime(2022, 2, 27, 9, 0, 0));
-            var ce4 = QuartzCronExpression.SpecificDateAt(new System.DateTime(2015, 5, 1, 7, 0, 30));
+            var ce1 = QuartzCronExpression.SpecificDateAt(new System.DateTime(2020, 1, 1, 8, 30, 0));
+            var ce2 = QuartzCronExpression.SpecificDateAt(new System.DateTime(2019, 2, 1, 0, 0, 0));
+            var ce3 = QuartzCronExpression.SpecificDateAt(new System.DateTime(2022, 3, 27, 9, 0, 0));
+            var ce4 = QuartzCronExpression.SpecificDateAt(new System.DateTime(2015, 4, 1, 7, 0, 30));
+            var ce5 = QuartzCronExpression.SpecificDateAt(new System.DateTime(2020, 5, 1, 8, 30, 0));
+            var ce6 = QuartzCronExpression.SpecificDateAt(new System.DateTime(2019, 6, 1, 0, 0, 0));
+            var ce7 = QuartzCronExpression.SpecificDateAt(new System.DateTime(2022, 7, 27, 9, 0, 0));
+            var ce8 = QuartzCronExpression.SpecificDateAt(new System.DateTime(2015, 8, 1, 7, 0, 30));
+            var ce9 = QuartzCronExpression.SpecificDateAt(new System.DateTime(2020, 9, 1, 8, 30, 0));
+            var ce10 = QuartzCronExpression.SpecificDateAt(new System.DateTime(2019, 10, 1, 0, 0, 0));
+            var ce11 = QuartzCronExpression.SpecificDateAt(new System.DateTime(2022, 11, 27, 9, 0, 0));
+            var ce12 = QuartzCronExpression.SpecificDateAt(new System.DateTime(2015, 12, 1, 7, 0, 30));
 
-            Assert.Equal("0 30 8 1 12 ? 2020", ce1);
-            Assert.Equal("0 0 0 1 1 ? 2019", ce2);
-            Assert.Equal("0 0 9 27 2 ? 2022", ce3);
-            Assert.Equal("30 0 7 1 5 ? 2015", ce4);
+            Assert.Equal("0 30 8 1 JAN ? 2020", ce1);
+            Assert.Equal("0 0 0 1 FEB ? 2019", ce2);
+            Assert.Equal("0 0 9 27 MAR ? 2022", ce3);
+            Assert.Equal("30 0 7 1 APR ? 2015", ce4);
+            Assert.Equal("0 30 8 1 MAY ? 2020", ce5);
+            Assert.Equal("0 0 0 1 JUN ? 2019", ce6);
+            Assert.Equal("0 0 9 27 JUL ? 2022", ce7);
+            Assert.Equal("30 0 7 1 AUG ? 2015", ce8);
+            Assert.Equal("0 30 8 1 SEP ? 2020", ce9);
+            Assert.Equal("0 0 0 1 OCT ? 2019", ce10);
+            Assert.Equal("0 0 9 27 NOV ? 2022", ce11);
+            Assert.Equal("30 0 7 1 DEC ? 2015", ce12);
         }
     }
 }

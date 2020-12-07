@@ -16,6 +16,18 @@ namespace QuartzCronGenerator
         September = 256,
         October = 512,
         November = 1024,
-        December = 2048,
+        December = 2048
+
+        
     }
+
+
+    static class MonthsHelper
+    {
+        public static Months GetfromMonthNumber(int monthNumber)
+        {
+            return (Months)Math.Pow(2, monthNumber -1);
+        }
+    }
+
 }

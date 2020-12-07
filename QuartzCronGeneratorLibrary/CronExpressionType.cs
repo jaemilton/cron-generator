@@ -11,9 +11,8 @@
         EverySpecificWeekDayAt,
         EverySpecificDayEveryNMonthAt,
         EverySpecificSeqWeekDayEveryNMonthAt,
-        EverySpecificDayOfMonthAt,
-        EverySpecificSeqWeekDayOfMonthAt,
-        EverySpecificDayOfSpecificMonthAt,
+        EverySpecificDayOfMonthsAt,
+        EverySpecificSeqWeekDayOfMonthsAt,
         SpecificDateAt
     }
 }
